@@ -16,7 +16,7 @@
           <button @click="filterTag = 'active'" :class="{active:filterTag === 'active'}">Active</button>
           <button @click="filterTag = 'completed'" :class="{active:filterTag === 'completed'}">Completed</button>
         </div>
-        <button class="todo-list__clear-completed" @click="clearCompleted">Clear completed</button>
+        <a href="#" class="todo-list__clear-completed" @click="clearCompleted" v-if="completedItemList.length" >Clear completed</a>
       </div>
   </div>
 </template>
@@ -68,6 +68,9 @@ export default {
     },
     itemsLeft () {
       return this.todoList.filter(todo => !todo.completed).length
+    },
+    completedItemList () {
+      return this.todoList.filter(todo => todo.completed)
     }
   }
 }
@@ -98,6 +101,7 @@ export default {
       display: flex;
       justify-content: space-between;
       margin-top: 15px;
+      align-items: center;
       button {
         border: 1px solid #eccc68;
         padding: 5px 10px;
@@ -114,6 +118,11 @@ export default {
       button:not(:last-of-type) {
         margin-right: 10px;
       }
+    }
+    &__clear-completed {
+      border: none;
+      color:#2c3e50;
+      font-size: 14px;
     }
   }
 </style>
